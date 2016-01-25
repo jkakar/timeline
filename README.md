@@ -1,20 +1,18 @@
 # Timeline
 
-**TODO: Add description**
+`Timeline.squash` squashes overlapping events into a single timeline without
+overlaps:
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
-  1. Add timeline to your list of dependencies in `mix.exs`:
-
-        def deps do
-          [{:timeline, "~> 0.0.1"}]
-        end
-
-  2. Ensure timeline is started before your application:
-
-        def application do
-          [applications: [:timeline]]
-        end
-
+```elixir
+#      1    2    3    4    5    6    7    8    9    10   11   12
+#  ... E1==================E1 ....................................>
+#  ........ E2========E2 .........................................>
+#  ............................ E3===E3 ..........................>
+#  ............................ E4========E4 .....................>
+#  ........................................... E5========E5 ......>
+#  ................................................ E6===E6 ......>
+#      >--------- 4 --------<   >---- 2 ---<   >---- 2 ---<
+timelines = [{1, 5}, {2, 4}, {6, 7}, {6, 8}, {9, 11}, {10, 11}]
+squashed_timelines = [{1, 5}, {6, 8}, {9, 11}]
+squashed_timelines ^= Timeline.squash(timelines)
+```
