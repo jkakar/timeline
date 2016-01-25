@@ -1,7 +1,7 @@
 # Timeline
 
-`Timeline.squash` squashes overlapping events into a single timeline without
-overlaps:
+[`Timeline.squash/1`](https://github.com/jkakar/timeline/blob/master/lib/timeline.ex#L2-L14)
+squashes overlapping events into a single timeline without overlaps:
 
 ```elixir
 #      1    2    3    4    5    6    7    8    9    10   11   12
