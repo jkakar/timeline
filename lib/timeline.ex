@@ -1,4 +1,9 @@
 defmodule Timeline do
+  @moduledoc """
+  Squash a list of timelines on top of each other such that no two timelines
+  overlap.
+  """
+
   @doc """
   Transform a list of `{start_time, stop_time}` timelines sorted by start
   time, where event timelines may overlap, into a flattened list of timelines
@@ -10,7 +15,9 @@ defmodule Timeline do
   [{1, 4}]
   """
   def squash(timelines) do
-    List.foldl(timelines, [], &squash/2) |> Enum.reverse
+    timelines
+    |> List.foldl([], &squash/2)
+    |> Enum.reverse
   end
 
   defp squash({start_time, stop_time}, []) do
